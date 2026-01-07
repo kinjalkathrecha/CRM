@@ -5,6 +5,7 @@ from django.http import HttpResponse
 from django.views import generic 
 from .models import Lead,Agent
 from .forms import LeadForm,LeadModelForm,CustomUserCreationForm
+from agents.mixins import OrganisorAndLoginRequiredMixin
 # Create your views here.
 
 class SignupView(generic.CreateView):
@@ -51,7 +52,7 @@ def lead_detail(request,pk):
     return render(request,"leads/lead_detail.html",context)
 
 
-class LeadCreateView(LoginRequiredMixin,generic.CreateView):
+class LeadCreateView(OrganisorAndLoginRequiredMixin,generic.CreateView):
     template_name="leads/lead_create.html"
     form_class = LeadModelForm
 
@@ -82,7 +83,7 @@ def lead_create(request):
     return render(request,"leads/lead_create.html",context)
 
 
-class LeadUpdateView(LoginRequiredMixin,generic.UpdateView):
+class LeadUpdateView(OrganisorAndLoginRequiredMixin,generic.UpdateView):
     template_name="leads/lead_update.html"
     queryset=Lead.objects.all()
     form_class = LeadModelForm
@@ -106,7 +107,7 @@ def lead_update(request,pk):
     return render(request,"leads/lead_update.html",context)
 
 
-class LeadDeleteView(LoginRequiredMixin,generic.DeleteView):
+class LeadDeleteView(OrganisorAndLoginRequiredMixin,generic.DeleteView):
     template_name="leads/lead_delete.html"
     queryset=Lead.objects.all()
 
