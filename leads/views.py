@@ -29,14 +29,19 @@ class LeadListView(LoginRequiredMixin,generic.ListView):
     context_object_name="leads"
 
     def get_queryset(self):
-        user=self.request.user
-        #initial queryset of leads for the entire organisation
+        user = self.request.user
+    
         if user.is_organisor:
-            queryset=Lead.objects.filter(organisation=user.userprofile)
+            # Organisors see everything in their organization
+            queryset = Lead.objects.filter(organisation=user.userprofile)
+        elif hasattr(user, 'agent'):
+            # Agents see leads in their organization, filtered to themselves
+            queryset = Lead.objects.filter(organisation=user.agent.organisation)
+            queryset = queryset.filter(agent__user=user)
         else:
-            queryset=Lead.objects.filter(organisation=user.agent.organisation)
-            #filter for the agent that is logged in
-            queryset=queryset.filter(agent__user=user)
+            # If the user is neither an organisor nor an agent (e.g., a raw Superuser)
+            queryset = Lead.objects.none()
+        
         return queryset
 
 

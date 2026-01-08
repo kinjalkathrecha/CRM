@@ -1,9 +1,13 @@
+import random
+
 from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.mail import send_mail
 from leads.models import Agent
 from django.shortcuts import reverse
 from .forms import AgentModelForm
 from .mixins import OrganisorAndLoginRequiredMixin
+
 
 class AgentListView(OrganisorAndLoginRequiredMixin,generic.ListView):
     template_name="agents/agent_list.html"
@@ -20,9 +24,21 @@ class AgentCreateView(OrganisorAndLoginRequiredMixin,generic.CreateView):
         return reverse("agents:agent-list")
     
     def form_valid(self, form):
-        agent = form.save(commit=False)
-        agent.organisation = self.request.user.userprofile
-        agent.save()
+        user = form.save(commit=False)
+        user.is_agent=True
+        user.is_organisor=False
+        user.set_password(f"{random.randint(0,1000000)}")
+        user.save()
+        Agent.objects.create(
+            user=user,
+            organisation=self.request.user.userprofile
+        )
+        send_mail(
+            subject="you are invited to be an agent",
+            message="you were addded as an agent as CRM. Please come login to start working.",
+            from_email="admin@test.com",
+            recipient_list=[user.email]
+        )
         return super(AgentCreateView,self).form_valid(form)
     
 class AgentDetailView(OrganisorAndLoginRequiredMixin,generic.DetailView):
