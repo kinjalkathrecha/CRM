@@ -4,8 +4,13 @@ import os
 from dotenv import load_dotenv
 import dj_database_url
 
+
 DATABASES = {
-    'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
+    'default': dj_database_url.parse(
+        os.environ.get("DATABASE_URL"),
+        conn_max_age=600,
+        ssl_require=True,
+    )
 }
 
 
@@ -81,19 +86,19 @@ WSGI_APPLICATION = 'CRM.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': env("DB_NAME"),
-        'USER':env("DB_USER"),
-        'PASSWORD':env("DB_PASSWORD"),
-        'HOST':env("DB_HOST"),
-        'PORT':env("DB_PORT"),
-        'OPTIONS': {
-            'options': '-c search_path=public,django,static' # Tells Django to look in 'public'
-        },
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': env("DB_NAME"),
+#         'USER':env("DB_USER"),
+#         'PASSWORD':env("DB_PASSWORD"),
+#         'HOST':env("DB_HOST"),
+#         'PORT':env("DB_PORT"),
+#         'OPTIONS': {
+#             'options': '-c search_path=public,django,static' # Tells Django to look in 'public'
+#         },
+#     }
+# }
 #postgres-password-'kinjal123'
 
 # Password validation
