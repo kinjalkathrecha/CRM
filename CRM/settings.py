@@ -2,6 +2,12 @@ from pathlib import Path
 import environ
 import os
 from dotenv import load_dotenv
+import dj_database_url
+
+DATABASES = {
+    'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
+}
+
 
 load_dotenv()
 
