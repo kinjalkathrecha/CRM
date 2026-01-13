@@ -18,7 +18,7 @@ if READ_DOT_ENV_FILE:
 SECRET_KEY = os.environ.get('SECRET_KEY')
 DEBUG = env('DEBUG')
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
