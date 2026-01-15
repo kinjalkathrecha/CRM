@@ -26,7 +26,7 @@ def landing_page(request):
 
 class LeadListView(LoginRequiredMixin,generic.ListView):
     template_name="leads/lead_list.html"
-    context_object_name="lead"
+    context_object_name="leads"
 
     def get_queryset(self):
         user = self.request.user
@@ -70,7 +70,7 @@ def lead_list(request):
 
 class LeadDetailView(LoginRequiredMixin,generic.DetailView):
     template_name="leads/lead_detail.html"
-    context_object_name="lead"
+    context_object_name="leads"
 
     def get_queryset(self):
         user=self.request.user
