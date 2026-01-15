@@ -26,7 +26,7 @@ def landing_page(request):
 
 class LeadListView(LoginRequiredMixin,generic.ListView):
     template_name="leads/lead_list.html"
-    context_object_name="leads"
+    context_object_name="lead"
 
     def get_queryset(self):
         user = self.request.user
