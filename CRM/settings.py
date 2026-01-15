@@ -5,13 +5,13 @@ from dotenv import load_dotenv
 import dj_database_url
 
 
-DATABASES = {
-    'default': dj_database_url.parse(
-        os.environ.get("DATABASE_URL"),
-        conn_max_age=600,
-        ssl_require=True,
-    )
-}
+# DATABASES = {
+#     'default': dj_database_url.parse(
+#         os.environ.get("DATABASE_URL"),
+#         conn_max_age=600,
+#         ssl_require=True,
+#     )
+# }
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
@@ -30,8 +30,8 @@ if READ_DOT_ENV_FILE:
 SECRET_KEY = os.environ.get('SECRET_KEY')
 DEBUG = env('DEBUG')
 
-# ALLOWED_HOSTS = ['*']
-ALLOWED_HOSTS = ["crm-5ojh.onrender.com"]
+ALLOWED_HOSTS = ['*']
+# ALLOWED_HOSTS = ["crm-5ojh.onrender.com"]
 
 
 # Application definition
@@ -88,19 +88,19 @@ WSGI_APPLICATION = 'CRM.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': env("DB_NAME"),
-#         'USER':env("DB_USER"),
-#         'PASSWORD':env("DB_PASSWORD"),
-#         'HOST':env("DB_HOST"),
-#         'PORT':env("DB_PORT"),
-#         'OPTIONS': {
-#             'options': '-c search_path=public,django,static' # Tells Django to look in 'public'
-#         },
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': env("DB_NAME"),
+        'USER':env("DB_USER"),
+        'PASSWORD':env("DB_PASSWORD"),
+        'HOST':env("DB_HOST"),
+        'PORT':env("DB_PORT"),
+        'OPTIONS': {
+            'options': '-c search_path=public,django,static' # Tells Django to look in 'public'
+        },
+    }
+}
 #postgres-password-'kinjal123'
 
 # Password validation
@@ -156,3 +156,17 @@ LOGOUT_REDIRECT_URL='/'
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "tailwind"  
 CRISPY_TEMPLATE_PACK = 'tailwind'
+
+if not DEBUG:
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+    SECURE_SSL_REDIRECT = True
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    SECURE_BROWSER_XSS_FILTER = True
+    SECURE_CONTENT_TYPE_NOSNIFF = True
+    SECURE_HSTS_SECONDS = 31536000  # 1 year
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_HSTS_PRELOAD = True
+    X_FRAME_OPTIONS = "DENY"
+
+    ALLOWED_HOSTS = ["*"]
