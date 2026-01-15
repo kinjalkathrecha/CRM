@@ -5,13 +5,15 @@ from dotenv import load_dotenv
 import dj_database_url
 
 
-# DATABASES = {
-#     'default': dj_database_url.parse(
-#         os.environ.get("DATABASE_URL"),
-#         conn_max_age=600,
-#         ssl_require=True,
-#     )
-# }
+
+DATABASES = {
+    'default': dj_database_url.config(
+        # This will look for a DATABASE_URL environment variable
+        default=os.environ.get('DATABASE_URL'),
+        conn_max_age=600,
+        ssl_require=True
+    )
+}
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
@@ -169,8 +171,7 @@ if not DEBUG:
     SECURE_HSTS_PRELOAD = True
     X_FRAME_OPTIONS = "DENY"
 
-    ALLOWED_HOSTS = ["*"]
-
+    ALLOWED_HOSTS = [os.environ.get('RENDER_EXTERNAL_HOSTNAME', 'crm-5ojh.onrender.com')]       
 LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
