@@ -146,7 +146,7 @@ STATICFILES_DIRS=[
 STATIC_ROOT="static_root"
 STORAGES = {
     "staticfiles": {
-        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+        "BACKEND": "whitenoise.storage.CompressedStaticFilesStorage",
     },
 }
 
