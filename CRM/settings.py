@@ -30,7 +30,8 @@ if READ_DOT_ENV_FILE:
 SECRET_KEY = os.environ.get('SECRET_KEY')
 DEBUG = env('DEBUG')
 
-ALLOWED_HOSTS = ['*']
+# ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ["crm-5ojh.onrender.com"]
 
 
 # Application definition
@@ -87,19 +88,19 @@ WSGI_APPLICATION = 'CRM.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': env("DB_NAME"),
-        'USER':env("DB_USER"),
-        'PASSWORD':env("DB_PASSWORD"),
-        'HOST':env("DB_HOST"),
-        'PORT':env("DB_PORT"),
-        'OPTIONS': {
-            'options': '-c search_path=public,django,static' # Tells Django to look in 'public'
-        },
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': env("DB_NAME"),
+#         'USER':env("DB_USER"),
+#         'PASSWORD':env("DB_PASSWORD"),
+#         'HOST':env("DB_HOST"),
+#         'PORT':env("DB_PORT"),
+#         'OPTIONS': {
+#             'options': '-c search_path=public,django,static' # Tells Django to look in 'public'
+#         },
+#     }
+# }
 #postgres-password-'kinjal123'
 
 # Password validation
