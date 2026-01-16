@@ -4,7 +4,6 @@ from pathlib import Path
 import environ
 from dotenv import load_dotenv
 
-SITE_ID = 1
 
 DATABASES = {
     'default': dj_database_url.config(
@@ -56,6 +55,16 @@ INSTALLED_APPS = [
     'leads',
     'agents',
 ]
+
+
+SITE_ID = 1
+
+# SendGrid settings
+EMAIL_BACKEND = "sendgrid_backend.SendgridBackend"
+SENDGRID_API_KEY = os.environ.get("SENDGRID_API_KEY")
+SENDGRID_SANDBOX_MODE_IN_DEBUG = False
+DEFAULT_FROM_EMAIL = "kinjalkathrecha2@gmail.com"  # Can be same as SendGrid verified sender
+EMAIL_TIMEOUT = 20
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
