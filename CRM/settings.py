@@ -59,12 +59,7 @@ INSTALLED_APPS = [
 
 SITE_ID = 1
 
-# SendGrid settings
-EMAIL_BACKEND = "sendgrid_backend.SendgridBackend"
-SENDGRID_API_KEY = os.environ.get("SENDGRID_API_KEY")
-SENDGRID_SANDBOX_MODE_IN_DEBUG = False
-DEFAULT_FROM_EMAIL = "kinjalkathrecha2@gmail.com"  # Can be same as SendGrid verified sender
-EMAIL_TIMEOUT = 20
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -184,16 +179,13 @@ if not DEBUG:
     ALLOWED_HOSTS = [os.environ.get('RENDER_EXTERNAL_HOSTNAME', 'crm-5ojh.onrender.com')]  
 
     
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
-DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
-EMAIL_TIMEOUT = 20
 
+EMAIL_BACKEND = 'sendgrid_backend.SendgridBackend'
+SENDGRID_API_KEY = os.environ.get('SENDGRID_API_KEY')
+DEFAULT_FROM_EMAIL = os.environ.get('EMAIL_HOST_USER')
+# Use this to prevent reset emails from being blocked
+SENDGRID_SANDBOX_MODE_IN_DEBUG = False
 
 CSRF_TRUSTED_ORIGINS = [
     'https://crm-5ojh.onrender.com'
