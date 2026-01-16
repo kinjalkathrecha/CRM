@@ -177,11 +177,11 @@ if not DEBUG:
     
 
 
-EMAIL_BACKEND = 'sendgrid_backend.SendgridBackend'
-SENDGRID_API_KEY = os.environ.get('SENDGRID_API_KEY')
-DEFAULT_FROM_EMAIL = os.environ.get('EMAIL_HOST_USER')
-# Use this to prevent reset emails from being blocked
-SENDGRID_SANDBOX_MODE_IN_DEBUG = False
+# EMAIL_BACKEND = 'sendgrid_backend.SendgridBackend'
+# SENDGRID_API_KEY = os.environ.get('SENDGRID_API_KEY')
+# DEFAULT_FROM_EMAIL = os.environ.get('EMAIL_HOST_USER')
+# # Use this to prevent reset emails from being blocked
+# SENDGRID_SANDBOX_MODE_IN_DEBUG = False
 
 CSRF_TRUSTED_ORIGINS = [
     'https://crm-5ojh.onrender.com'
