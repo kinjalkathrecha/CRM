@@ -15,7 +15,6 @@ from leads.views import landing_page, LandingPageView, SignupView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('accounts/', include('django.contrib.auth.urls')),  # Provides reset URLs
     path('', LandingPageView.as_view(), name='landing-page'),
     path('leads/',  include('leads.urls', namespace="leads")),
     path('agents/',  include('agents.urls', namespace="agents")),
