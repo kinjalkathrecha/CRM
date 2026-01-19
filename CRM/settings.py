@@ -3,6 +3,7 @@ import os
 from pathlib import Path
 import environ
 from dotenv import load_dotenv
+from django.contrib.sites.models import Site
 
 
 DATABASES = {
@@ -175,12 +176,20 @@ if not DEBUG:
 
     
 
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
-# EMAIL_BACKEND = 'sendgrid_backend.SendgridBackend'
-# SENDGRID_API_KEY = os.environ.get('SENDGRID_API_KEY')
-# DEFAULT_FROM_EMAIL = os.environ.get('EMAIL_HOST_USER')
-# # Use this to prevent reset emails from being blocked
-# SENDGRID_SANDBOX_MODE_IN_DEBUG = False
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+PASSWORD_RESET_TIMEOUT = 60 * 60  # 1 hour
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+USE_X_FORWARDED_HOST = True
 
 CSRF_TRUSTED_ORIGINS = [
     'https://crm-5ojh.onrender.com'
