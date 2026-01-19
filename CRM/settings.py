@@ -3,7 +3,6 @@ import os
 from pathlib import Path
 import environ
 from dotenv import load_dotenv
-from django.contrib.sites.models import Site
 
 
 DATABASES = {
