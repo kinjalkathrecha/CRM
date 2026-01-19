@@ -150,6 +150,14 @@ STORAGES = {
         "BACKEND": "whitenoise.storage.CompressedStaticFilesStorage",
     },
 }
+STORAGES = {
+    "default": {
+        "BACKEND": "django.core.files.storage.FileSystemStorage",
+    },
+    "staticfiles": {
+        "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
+    },
+}
 
 AUTH_USER_MODEL = 'leads.User'
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
@@ -158,6 +166,8 @@ LOGIN_URL="/login"
 LOGOUT_REDIRECT_URL='/'
 CRISPY_ALLOWED_TEMPLATE_PACKS = "tailwind"  
 CRISPY_TEMPLATE_PACK = 'tailwind'
+MEDIA_URL = "/media/"
+MEDIA_ROOT = BASE_DIR / "media"
 
 if not DEBUG:
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
