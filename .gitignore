@@ -5,6 +5,7 @@ __pycache__/
 
 #python
 static_root/
+media/
 venv_new/
 # C extensions
 *.so
