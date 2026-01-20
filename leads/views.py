@@ -2,7 +2,7 @@ from django.contrib import messages
 from django.core.mail import send_mail
 from django.shortcuts import render,redirect,reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import HttpResponse
+from django.http import HttpResponse,JsonResponse
 from django.views import generic 
 from .models import Lead,Agent,Category
 from .forms import CategoryModelForm,LeadForm,LeadModelForm,CustomUserCreationForm,AssignAgentForm,LeadCategoryUpdateForm
@@ -316,3 +316,17 @@ class CategoryDeleteView(OrganisorAndLoginRequiredMixin,generic.DeleteView):
                 organisation=user.agent.organisation
             )
         return queryset
+    
+class LeadJsonView(generic.View):
+
+    def get(self,request,*args,**kwargs):
+
+        qs=list(Lead.objects.all().values(
+            "first_name",
+            "last_name",
+            "age"
+        ))
+
+        return JsonResponse({
+            "qs": qs
+        })
