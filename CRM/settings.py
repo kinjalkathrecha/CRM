@@ -216,7 +216,7 @@ LOGGING = {
     },
     "root": {
         "handlers": ["console"],
-        "level": "ERROR",
+        "level": "WARNING",
     },
 }
 SITE_ID = 1
