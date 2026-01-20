@@ -1,3 +1,4 @@
+import logging
 from django.contrib import messages
 from django.core.mail import send_mail
 from django.shortcuts import render,redirect,reverse
@@ -9,13 +10,14 @@ from .forms import CategoryModelForm,LeadForm,LeadModelForm,CustomUserCreationFo
 from agents.mixins import OrganisorAndLoginRequiredMixin
 # Create your views here.
 
+logger = logging.getLogger(__name__)
+
 class SignupView(generic.CreateView):
     template_name="registration/signup.html"
     form_class=CustomUserCreationForm
 
     def get_success_url(self):
         return reverse("login")
-
 
 class LandingPageView(generic.TemplateView):
     template_name="landing.html"
@@ -45,7 +47,8 @@ class LeadListView(LoginRequiredMixin,generic.ListView):
             )
             #filter for the agggent that is logged in  
             queryset=queryset.filter(agent__user=user)
-        messages.success(self.request,"you have successfully created a lead")
+        #messages.success(self.request,"you have successfully created a lead")
+        logger.warning("this is a test warning")
         return queryset
     
     def get_context_data(self, **kwargs):
