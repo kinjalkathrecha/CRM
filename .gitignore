@@ -14,7 +14,7 @@ venv_new/
 .Python
 build/
 develop-eggs/
-dist/
+
 downloads/
 eggs/
 .eggs/
