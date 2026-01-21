@@ -34,32 +34,38 @@ class DashboardView(OrganisorAndLoginRequiredMixin,generic.TemplateView):
     template_name="dashboard.html"
 
     def get_context_data(self, **kwargs):
-        context = super(DashboardView, self).get_context_data(**kwargs)
-        user=self.request.user
-        #how many leads we have in total
-        total_lead_count=Lead.objects.filter(organisation=user.userprofile).count()
+        context = super().get_context_data(**kwargs)
+        user = self.request.user
 
-        #how many new leads in the last 30 days
-        thirty_days_ago=datetime.date.today() - datetime.timedelta(days=30)
-         
-        total_in_past30=Lead.objects.filter(
-            organisation=user.userprofile,
-            date_added__gte=thirty_days_ago, 
+        # how many leads we have in total
+        total_lead_count = Lead.objects.filter(
+            organisation=user.userprofile
         ).count()
 
-        #how many converted leads in the last 30 days
-        converted_category = Category.objects.get(name="converted")
-        converted_in_past30=Lead.objects.filter(
+        # how many new leads in the last 30 days
+        thirty_days_ago = datetime.date.today() - datetime.timedelta(days=30)
+
+        total_in_past30 = Lead.objects.filter(
+            organisation=user.userprofile,
+            date_added__gte=thirty_days_ago,
+        ).count()
+
+        # get or create converted category (SAFE)
+        converted_category, _ = Category.objects.get_or_create(
+            name="converted"
+        )
+
+        # how many converted leads in the last 30 days
+        converted_in_past30 = Lead.objects.filter(
             organisation=user.userprofile,
             category=converted_category,
             converted_date__gte=thirty_days_ago
         ).count()
 
-
         context.update({
-            "total_lead_count":total_lead_count,
-            "total_in_past30":total_in_past30,
-            "converted_in_past30":converted_in_past30
+            "total_lead_count": total_lead_count,
+            "total_in_past30": total_in_past30,
+            "converted_in_past30": converted_in_past30,
         })
         return context
 
