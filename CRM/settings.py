@@ -50,12 +50,13 @@ INSTALLED_APPS = [
     #Third party apps
     'crispy_forms',
     "crispy_tailwind",
+    "tailwind",
+    "theme",
 
     #local apps
     'leads',
     'agents',
 ]
-
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -220,3 +221,4 @@ LOGGING = {
     },
 }
 SITE_ID = 1
+TAILWIND_APP_NAME = 'theme'
