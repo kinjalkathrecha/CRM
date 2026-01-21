@@ -176,6 +176,11 @@ class LeadUpdateView(OrganisorAndLoginRequiredMixin,generic.UpdateView):
         user=self.request.user
         #initial queryset of leads for the entire organisation
         return Lead.objects.filter(organisation=user.userprofile)
+    
+    def form_valid(self,form):
+        form.save()
+        messages.info(self.request,"you have successfully updated this lead")
+        return super(LeadUpdateView,self).form_valid(form)
 
 
 def lead_update(request,pk):
