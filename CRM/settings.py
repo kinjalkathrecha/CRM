@@ -46,6 +46,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites', 
+    'cloudinary',
+    'cloudinary_storage',
 
     #Third party apps
     'crispy_forms',
@@ -222,3 +224,9 @@ LOGGING = {
 }
 SITE_ID = 1
 TAILWIND_APP_NAME = 'theme'
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'dkuvmeyfu',
+    'API_KEY': '381593282228295',
+    'API_SECRET': 'Dahr5Su1iouDontpbXuiCxqId6U',
+}
