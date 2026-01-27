@@ -169,8 +169,7 @@ LOGIN_URL="/login"
 LOGOUT_REDIRECT_URL='/'
 CRISPY_ALLOWED_TEMPLATE_PACKS = "tailwind"  
 CRISPY_TEMPLATE_PACK = 'tailwind'
-MEDIA_URL = "/media/"
-MEDIA_ROOT = BASE_DIR / "media"
+
 
 if not DEBUG:
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
@@ -230,3 +229,5 @@ CLOUDINARY_STORAGE = {
     'API_KEY': '381593282228295',
     'API_SECRET': 'Dahr5Su1iouDontpbXuiCxqId6U',
 }
+MEDIA_URL = "/media/"
+MEDIA_ROOT = BASE_DIR / "media"
