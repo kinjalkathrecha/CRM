@@ -59,6 +59,7 @@ INSTALLED_APPS = [
     'leads',
     'agents',
 ]
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -223,7 +224,6 @@ LOGGING = {
 }
 SITE_ID = 1
 TAILWIND_APP_NAME = 'theme'
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 CLOUDINARY_STORAGE = {
     'CLOUD_NAME': 'dkuvmeyfu',
     'API_KEY': '381593282228295',
